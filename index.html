@@ -20,13 +20,15 @@
 			const canvas = document.getElementById('myCanvas');
 			const app = new PIXI.Application({
 				view: canvas,
-				width: window.innerWidth,
-				height: (window.innerWidth*0.54)
+				width: 1400,
+				height: 756
 			});
-			const texture = PIXI.Texture.from('pier_photo-B&W-Isabella_Merl.jpeg');
+			const texture = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
 			const img = new PIXI.Sprite(texture);
-			img.x = app.renderer.width / 2 - img.width / 3;
-			img.y = app.renderer.height / 2 - img.height / 3;
+			img.width = 700;
+			img.height = 378;
+			img.x = app.renderer.width / 2 - (img.width / 2);
+			img.y = app.renderer.height / 2 - (img.height / 2);
 			app.stage.addChild(img);
 		</script>
 	</body>
