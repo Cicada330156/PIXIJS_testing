@@ -20,18 +20,6 @@
 		<script type="text/javascript">
 			const canvas = document.getElementById('myCanvas');
 
-			/*if (window.innerWidth >= 1400 && window.innerHeight >= 756){
-				var canvasWidth = 1400;
-				var canvasHeight = 756;
-			} else {
-				if ((window.innerWidth * 0.54) >= window.innerHeight){
-                                	var canvasWidth = window.innerWidth * 0.75;
-                                	var canvasHeight = canvasWidth * 0.54;
-				} else {
-					var canvasHeight = window.innerHeight * 0.75;
-					var canvasWidth = canvasHeight * 1.9;
-				}
-			}
 			console.log("set canvas h/w");*/
 			
 			let _w = window.innerWidth;
@@ -77,6 +65,10 @@
 			loader.onComplete.add(handleLoadComplete);
 
 			loader.add('pier', 'https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
+			loader.add('dove', 'https://cicada330156.github.io/PIXIJS_testing/dove_clipart.png');
+			loader.add('phone', 'https://cicada330156.github.io/PIXIJS_testing/iphone.png');
+			loader.add('bird', 'https://cicada330156.github.io/PIXIJS_testing/cardinal_clipart.png');
+			loader.add('pizza', 'https://cicada330156.github.io/PIXIJS_testing/pizza.png');
 			loader.on("progress", handleLoadProgress);
 			loader.load();
 			
