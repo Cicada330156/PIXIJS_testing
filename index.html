@@ -63,11 +63,43 @@
 			stage.addChild(img);
 			console.log("added image");
 
+			ticker.add(animate);*/
+
+			console.log(PIXI.utils.TextureCache);
+
 			const ticker = new PIXI.Ticker();
-			ticker.add(animate);
-			ticker.start();*/
+			ticker.start();
 			
 			console.log(renderer.resolution + ", " + renderer.width); 
+
+
+			let loader = PIXI.Loader.shared;
+			loader.onComplete.add(handleLoadComplete);
+
+			loader.add('pier', 'https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
+			loader.on("progress", handleLoadProgress);
+			loader.load();
+			
+			let img;
+			
+			function handleLoadProgress(loader, resource) {
+				console.log(loader.progress + "% loaded");
+
+			}
+
+			function handleLoadComplete() {
+				let texture = loader.resources['pier'].texture;
+				img = new PIXI.Sprite(texture);
+				img.anchor.x = 0.5;
+				img.anchor.y = 0.5;
+				stage.addChild(img);
+				
+				img2 = new PIXI.Sprite(texture);
+				img.anchor.x = 1;
+				img.anchor.y = 1;
+				stage.addChild(img2);
+				ticker.add(animate);
+			}
 
 			function animate() {
 				
@@ -78,6 +110,8 @@
 				img.height = renderer.screen.width*0.66/2;
 				
 				img.rotation += 0.1;
+
+				img2.x = 
 
 				renderer.render(stage);
 			}
