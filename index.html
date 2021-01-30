@@ -20,7 +20,7 @@
 		<script type="text/javascript">
 			const canvas = document.getElementById('myCanvas');
 
-			console.log("set canvas h/w");*/
+			console.log("set canvas h/w");
 			
 			let _w = window.innerWidth;
 			let _h = window.innerHeight;
@@ -44,66 +44,48 @@
 
 			const stage = new PIXI.Container();
 			
-			/*const texture = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
+			const texture = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
 			const img = new PIXI.Sprite(texture);
 			img.anchor.x = 0.5;
 			img.anchor.y = 0.5;
 			stage.addChild(img);
-			console.log("added image");
 
-			ticker.add(animate);*/
+			const img2 = new PIXI.Sprite(texture);
+			img2.anchor.x = 1;
+			img2.anchor.y = 1;
+			stage.addChild(img2);
 
-			console.log(PIXI.utils.TextureCache);
+			const dove = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/dove.png');
+			const phone = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/iphone.png');
+			const bird = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/cardinal.png');
+			const pizza = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/pizza.png');
+
 
 			const ticker = new PIXI.Ticker();
+			ticker.add(animate);
 			ticker.start();
 			
-			console.log(renderer.resolution + ", " + renderer.width); 
-
-
-			let loader = PIXI.Loader.shared;
-			loader.onComplete.add(handleLoadComplete);
-
+			/*let loader = PIXI.Loader.shared;
+			loader.onComplete.add(handleLoadComplete);*
+			
 			loader.add('pier', 'https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
-			loader.add('dove', 'https://cicada330156.github.io/PIXIJS_testing/dove_clipart.png');
+			loader.add('dove', 'https://cicada330156.github.io/PIXIJS_testing/dove.png');
 			loader.add('phone', 'https://cicada330156.github.io/PIXIJS_testing/iphone.png');
-			loader.add('bird', 'https://cicada330156.github.io/PIXIJS_testing/cardinal_clipart.png');
-			loader.add('pizza', 'https://cicada330156.github.io/PIXIJS_testing/pizza.png');
-			loader.on("progress", handleLoadProgress);
-			loader.load();
+			loader.add('bird', 'https://cicada330156.github.io/PIXIJS_testing/cardinal.png');
+			loader.add('pizza', 'https://cicada330156.github.io/PIXIJS_testing/pizza.png');*/
 			
-			let img;
-			
-			function handleLoadProgress(loader, resource) {
-				console.log(loader.progress + "% loaded");
-
-			}
-
-			function handleLoadComplete() {
-				let texture = loader.resources['pier'].texture;
-				img = new PIXI.Sprite(texture);
-				img.anchor.x = 0.5;
-				img.anchor.y = 0.5;
-				stage.addChild(img);
-				
-				img2 = new PIXI.Sprite(texture);
-				img.anchor.x = 1;
-				img.anchor.y = 1;
-				stage.addChild(img2);
-				ticker.add(animate);
-			}
 
 			function animate() {
-				
 				img.y = renderer.screen.height / 2;
 				img.x = renderer.screen.width / 2;
-				
 				img.width = renderer.screen.width / 2;
 				img.height = renderer.screen.width*0.66/2;
-				
-				img.rotation += 0.1;
+				img.rotation += 0.01;
 
-				img2.x = 
+				img2.x = renderer.screen.width;
+				img2.y = renderer.screen.height;
+				img2.width = renderer.screen.width/5;
+				img2.height = renderer.screen.width/5*0.54;
 
 				renderer.render(stage);
 			}
