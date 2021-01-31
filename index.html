@@ -43,6 +43,8 @@
 			}
 
 			const stage = new PIXI.Container();
+
+			let container = new PIXI.Container();
 			
 			const texture = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
 			const img = new PIXI.Sprite(texture);
@@ -55,38 +57,66 @@
 			img2.anchor.y = 1;
 			stage.addChild(img2);
 
+			const bubbleMask = ('');
+
 			const dove = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/dove.png');
 			const phone = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/iphone.png');
 			const bird = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/cardinal.png');
 			const pizza = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/pizza.png');
 
+			doveSprite = new PIXI.Sprite(dove);
+			doveScale = doveSprite.width/doveSprite.height;
+			doveSprite.height = renderer.screen.height/10;
+			doveSprite.width = doveScale * doveSprite.height;
+			doveSprite.y = 100;
+			container.addChild(doveSprite);
+			
+			phoneSprite = new PIXI.Sprite(phone);
+			phoneScale = phoneSprite.width/phoneSprite.height;
+			phoneSprite.height = renderer.screen.height/10;
+			phoneSprite.width = phoneScale * phoneSprite.height;
+			phoneSprite.y = 100;
+			container.addChild(phoneSprite);
+
+			birdSprite = new PIXI.Sprite(bird);
+			birdScale = birdSprite.width/birdSprite.height;
+			birdSprite.height = renderer.screen.height/10;
+			birdSprite.width = birdScale * birdSprite.height;
+			birdSprite.x = 200;
+			container.addChild(birdSprite);
+
+			pizzaSprite = new PIXI.Sprite(pizza);
+			pizzaScale = pizzaSprite.width/pizzaSprite.height;
+			pizzaSprite.height = renderer.screen.height/10;
+			pizzaSprite.width = pizzaScale * pizzaSprite.height;
+			pizzaSprite.y = 300;
+			container.addChild(pizzaSprite);
 
 			const ticker = new PIXI.Ticker();
+			stage.addChild(container);
 			ticker.add(animate);
 			ticker.start();
 			
-			/*let loader = PIXI.Loader.shared;
-			loader.onComplete.add(handleLoadComplete);*
-			
-			loader.add('pier', 'https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
-			loader.add('dove', 'https://cicada330156.github.io/PIXIJS_testing/dove.png');
-			loader.add('phone', 'https://cicada330156.github.io/PIXIJS_testing/iphone.png');
-			loader.add('bird', 'https://cicada330156.github.io/PIXIJS_testing/cardinal.png');
-			loader.add('pizza', 'https://cicada330156.github.io/PIXIJS_testing/pizza.png');*/
-			
 
+			let delta = 0;
 			function animate() {
 				img.y = renderer.screen.height / 2;
 				img.x = renderer.screen.width / 2;
-				img.width = renderer.screen.width / 2;
-				img.height = renderer.screen.width*0.66/2;
-				img.rotation += 0.01;
+				img.width = renderer.screen.width * 0.9;
+				img.height = img.width * 0.66;
+				//img.rotation += 0.01;
 
 				img2.x = renderer.screen.width;
 				img2.y = renderer.screen.height;
 				img2.width = renderer.screen.width/5;
 				img2.height = renderer.screen.width/5*0.54;
 
+				delta += 0.1;
+
+				birdSprite.y = 100 + Math.sin(delta) * 10;
+				doveSprite.x = 100 - Math.sin(delta) * 10;
+
+				//renderer.render(container);
 				renderer.render(stage);
 			}
 		</script>
