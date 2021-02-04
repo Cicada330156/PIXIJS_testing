@@ -46,10 +46,14 @@
 
 			let container = new PIXI.Container();
 			
+			/*const bubbleMask = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/bubble_mask.png');
+			const BMSprite = new PIXI.Sprite(bubbleMask);
+			stage.addChild(BMSprite);*/
 			const texture = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/pier_photo-B&W-Isabella_Merl.jpeg');
 			const img = new PIXI.Sprite(texture);
 			img.anchor.x = 0.5;
 			img.anchor.y = 0.5;
+			//img.mask = bubbleMask
 			stage.addChild(img);
 
 			const img2 = new PIXI.Sprite(texture);
@@ -57,7 +61,6 @@
 			img2.anchor.y = 1;
 			stage.addChild(img2);
 
-			const bubbleMask = ('');
 
 			const dove = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/dove.png');
 			const phone = PIXI.Texture.from('https://cicada330156.github.io/PIXIJS_testing/iphone.png');
@@ -82,7 +85,7 @@
 			birdScale = birdSprite.width/birdSprite.height;
 			birdSprite.height = renderer.screen.height/10;
 			birdSprite.width = birdScale * birdSprite.height;
-			birdSprite.x = 200;
+			birdSprite.x = 300;
 			container.addChild(birdSprite);
 
 			pizzaSprite = new PIXI.Sprite(pizza);
@@ -97,6 +100,24 @@
 			ticker.add(animate);
 			ticker.start();
 			
+			//graphics API
+
+			let graphic = new PIXI.Graphics();
+			graphic.x = renderer.screen.width/2;
+			graphic.y = renderer.screen.height/2;
+			stage.addChild(graphic);
+			graphic.lineStyle(5, 0xffffff);
+			graphic.beginFill(0x00ffff);
+			graphic.drawCircle(0, 0, 100);
+
+			graphic.drawRect(-50, -75, 100, 150);
+
+			graphic.arc(0, 0, 200, 0, 1);
+			graphic.endFill();
+			let arcSize = 0;
+			let arcSize1 = 0;
+			let arcGrow = true;
+
 
 			let delta = 0;
 			function animate() {
@@ -113,11 +134,38 @@
 
 				delta += 0.1;
 
-				birdSprite.y = 100 + Math.sin(delta) * 10;
+				birdSprite.y = 100 + Math.sin(delta/10) * 100;
 				doveSprite.x = 100 - Math.sin(delta) * 10;
+				img.mask = birdSprite;
+				
+
+				//arcSize++;
+				if (arcSize > 360) {
+					arcSize = 0;
+					arcGrow = false;
+				}
+				if (arcSize1 > 360) {
+					arcSize1 = 1;
+					arcGrow = true;
+				}
+				if (arcGrow) {
+					arcSize++;
+				} else {
+					arcSize1++;
+				}
+				graphic.clear();
+				graphic.lineStyle(5, 0xffffff);
+				graphic.moveTo(0, 0);
+				graphic.beginFill(0xFF00FF);
+				graphic.arc(0, 0, 200, (arcSize1 * (Math.PI/180)), (arcSize * (Math.PI/180)));
+				graphic.lineTo(0, 0);
+				graphic.endFill();
 
 				//renderer.render(container);
 				renderer.render(stage);
+
+				graphic.x = renderer.screen.width/2;
+				graphic.y = renderer.screen.height/2;
 			}
 		</script>
 	</body>
